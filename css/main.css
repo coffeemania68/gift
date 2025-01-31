@@ -13,3 +13,25 @@
     @apply bg-primary text-white border-primary
            transform scale-105;
 }
+
+/* 카테고리 버튼 스타일 */
+.category-btn {
+    @apply flex flex-col items-center justify-center
+           p-4 rounded-xl transition-all duration-200
+           hover:transform hover:scale-105;
+}
+
+.icon-circle {
+    @apply w-16 h-16 rounded-full bg-white
+           flex items-center justify-center
+           shadow-md mb-2
+           border-2 border-gray-100;
+}
+
+.category-btn.selected .icon-circle {
+    @apply bg-primary border-primary;
+}
+
+.category-btn.selected {
+    @apply text-primary;
+}
