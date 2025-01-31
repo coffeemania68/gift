@@ -84,23 +84,27 @@ function createProductCard(product) {
     const card = document.createElement('div');
     card.className = 'bg-white rounded-xl shadow-lg overflow-hidden transform transition hover:-translate-y-1 hover:shadow-xl';
     
-    // 가격대 표시 형식 변환
-    const priceDisplay = {
-        '1m': '1만원대',
-        '3m': '3만원대',
-        '5m': '5만원대',
-        '10m': '10만원대',
-        '20m': '20만원대',
-        'under50': '50만원 미만',
-        'over50': '50만원 이상'
-    }[product.price];
-
+    const heartMessages = [
+        "마음을 담아 선물하세요 💝",
+        "특별한 마음을 전하세요 ❤️",
+        "당신의 마음이 닿을 거예요 💖",
+        "감동이 될 선물이에요 💗",
+        "사랑을 담아 준비했어요 💓"
+    ];
+    
+    const randomMessage = heartMessages[Math.floor(Math.random() * heartMessages.length)];
+    
     card.innerHTML = `
-        <img src="${product.image}" alt="${product.name}" 
-             class="w-full h-48 object-cover">
+        <div class="aspect-w-1 aspect-h-1 w-full">
+            <img src="${product.image}" alt="${product.name}" 
+                 class="w-full h-48 object-contain">
+        </div>
         <div class="p-4">
             <h3 class="text-lg font-bold text-gray-800 mb-2">${product.name}</h3>
-            <p class="text-primary font-medium">${priceDisplay}</p>
+            <p class="text-primary font-medium mb-2">${priceDisplay}</p>
+            <p class="text-sm text-gray-600 italic mb-4 animate-fade-in animate-pulse">
+                ${randomMessage}
+            </p>
             <div class="mt-4 flex justify-between items-center">
                 <span class="text-sm text-gray-500">${getCategoryName(product.category)}</span>
                 <a href="${product.link}" target="_blank" 
