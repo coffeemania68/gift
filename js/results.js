@@ -2,7 +2,12 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     const filters = getFilterParams();
+    console.log('Filters:', filters);  // 필터 값 확인
+    console.log('Products:', products);  // products 데이터 확인
+    
     const filteredProducts = filterProducts(products, filters);
+    console.log('Filtered Products:', filteredProducts);  // 필터링 결과 확인
+    
     displayResults(filteredProducts);
 });
 
