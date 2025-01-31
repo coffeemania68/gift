@@ -1,25 +1,42 @@
-// results.js
-
 document.addEventListener('DOMContentLoaded', function() {
     const filters = getFilterParams();
-    console.log('Filters:', filters);  // 필터 값 확인
-    console.log('Products:', products);  // products 데이터 확인
+    console.log('Filters:', filters); // 디버깅용
     
+    // 개인화된 메시지 설정
+    const headerMessage = document.getElementById('personalizedMessage');
+    headerMessage.textContent = getPersonalizedMessage(filters.relation);
+    
+    // 상품 필터링 및 표시
     const filteredProducts = filterProducts(products, filters);
-    console.log('Filtered Products:', filteredProducts);  // 필터링 결과 확인
-    
+    console.log('Filtered Products:', filteredProducts); // 디버깅용
     displayResults(filteredProducts);
 });
+
+function getPersonalizedMessage(relation) {
+    const messages = {
+        'f': '가족을 위해 엄선한 선물들이에요! 💝',
+        'p': '부모님을 위해 정성스레 골라봤어요! 💖',
+        'l': '연인에게 줄 특별한 선물이에요! 💕',
+        'c': '소중한 친구를 위한 선물이에요! 🎁',
+        'b': '사랑하는 형제자매를 위한 선물이에요! 💝',
+        't': '선생님을 위한 감사의 선물이에요! 🙏',
+        'w': '직장동료를 위한 센스있는 선물이에요! 🎯',
+        'e': '어르신을 위한 효도 선물이에요! 💝',
+        'k': '귀여운 아이를 위한 선물이에요! 🧸',
+        'default': '소중한 분을 위해 엄선한 선물이에요! 🎁'
+    };
+    return messages[relation] || messages['default'];
+}
 
 function getFilterParams() {
     const params = new URLSearchParams(window.location.search);
     const filters = {};
-
+    
     // 기본 파라미터 처리
     ['price', 'category', 'gender', 'age', 'relation', 'season'].forEach(key => {
         filters[key] = params.get(key) || '';
     });
-
+    
     return filters;
 }
 
@@ -47,7 +64,6 @@ function filterProducts(products, filters) {
         // 계절 매칭 ('a'는 모든 계절 허용)
         const seasonMatch = product.season === 'a' || product.season === filters.season;
 
-        // 모든 조건을 만족하는지 확인
         return priceMatch && 
                categoryMatch && 
                genderMatch && 
@@ -94,6 +110,17 @@ function createProductCard(product) {
     
     const randomMessage = heartMessages[Math.floor(Math.random() * heartMessages.length)];
     
+    // 가격대 표시 형식 변환
+    const priceDisplay = {
+        '1m': '1만원대',
+        '3m': '3만원대',
+        '5m': '5만원대',
+        '10m': '10만원대',
+        '20m': '20만원대',
+        'under50': '50만원 미만',
+        'over50': '50만원 이상'
+    }[product.price];
+
     card.innerHTML = `
         <div class="aspect-w-1 aspect-h-1 w-full">
             <img src="${product.image}" alt="${product.name}" 
