@@ -1,17 +1,11 @@
 // results.js
 
 document.addEventListener('DOMContentLoaded', function() {
-    // URL에서 필터 파라미터 가져오기
     const filters = getFilterParams();
-    
-    // 상품 필터링
     const filteredProducts = filterProducts(products, filters);
-    
-    // 결과 표시
     displayResults(filteredProducts);
 });
 
-// URL 파라미터 파싱 함수
 function getFilterParams() {
     const params = new URLSearchParams(window.location.search);
     const filters = {};
@@ -21,43 +15,46 @@ function getFilterParams() {
         filters[key] = params.get(key) || '';
     });
 
-    // OR 조건 파라미터 처리
-    ['season', 'category', 'price'].forEach(key => {
-        filters[`${key}All`] = params.get(`${key}All`) === 'true';
-    });
-
     return filters;
 }
 
-// 상품 필터링 함수
 function filterProducts(products, filters) {
     return products.filter(product => {
-        // 기본 필터 조건 (AND)
-        const basicConditions = [
-            // 성별은 정확히 일치
-            product.gender === filters.gender,
-            // 연령대 일치
-            product.age === filters.age,
-            // 관계 일치
-            product.relation === filters.relation
-        ];
+        // 각 필터 조건 확인
+        const priceMatch = product.price === filters.price;
+        const categoryMatch = product.category === filters.category;
+        
+        // 성별 매칭 ('a'는 모든 성별 허용)
+        const genderMatch = product.gender === 'a' || product.gender === filters.gender;
+        
+        // 연령대 매칭 (배열 또는 단일값, 'a'는 모든 연령 허용)
+        const ageMatch = product.age === 'a' || 
+            (Array.isArray(product.age) ? 
+                product.age.includes(filters.age) : 
+                product.age === filters.age);
+        
+        // 관계 매칭 (배열 또는 단일값, 'a'는 모든 관계 허용)
+        const relationMatch = product.relation === 'a' || 
+            (Array.isArray(product.relation) ? 
+                product.relation.includes(filters.relation) : 
+                product.relation === filters.relation);
+        
+        // 계절 매칭 ('a'는 모든 계절 허용)
+        const seasonMatch = product.season === 'a' || product.season === filters.season;
 
-        // OR 조건 처리
-        const priceCondition = filters.priceAll || product.price === filters.price;
-        const categoryCondition = filters.categoryAll || product.category === filters.category;
-        const seasonCondition = filters.seasonAll || product.season === filters.season;
-
-        return basicConditions.every(condition => condition) && 
-               priceCondition && 
-               categoryCondition && 
-               seasonCondition;
+        // 모든 조건을 만족하는지 확인
+        return priceMatch && 
+               categoryMatch && 
+               genderMatch && 
+               ageMatch && 
+               relationMatch && 
+               seasonMatch;
     });
 }
 
-// 결과 표시 함수
 function displayResults(products) {
     const resultsGrid = document.getElementById('results-grid');
-    resultsGrid.innerHTML = ''; // 기존 결과 초기화
+    resultsGrid.innerHTML = '';
 
     if (products.length === 0) {
         resultsGrid.innerHTML = `
@@ -72,24 +69,33 @@ function displayResults(products) {
         return;
     }
 
-    // 결과 카드 생성
     products.forEach(product => {
         const card = createProductCard(product);
         resultsGrid.appendChild(card);
     });
 }
 
-// 상품 카드 생성 함수
 function createProductCard(product) {
     const card = document.createElement('div');
     card.className = 'bg-white rounded-xl shadow-lg overflow-hidden transform transition hover:-translate-y-1 hover:shadow-xl';
     
+    // 가격대 표시 형식 변환
+    const priceDisplay = {
+        '1m': '1만원대',
+        '3m': '3만원대',
+        '5m': '5만원대',
+        '10m': '10만원대',
+        '20m': '20만원대',
+        'under50': '50만원 미만',
+        'over50': '50만원 이상'
+    }[product.price];
+
     card.innerHTML = `
         <img src="${product.image}" alt="${product.name}" 
              class="w-full h-48 object-cover">
         <div class="p-4">
             <h3 class="text-lg font-bold text-gray-800 mb-2">${product.name}</h3>
-            <p class="text-primary font-medium">${Number(product.price).toLocaleString()}원</p>
+            <p class="text-primary font-medium">${priceDisplay}</p>
             <div class="mt-4 flex justify-between items-center">
                 <span class="text-sm text-gray-500">${getCategoryName(product.category)}</span>
                 <a href="${product.link}" target="_blank" 
@@ -103,13 +109,11 @@ function createProductCard(product) {
     return card;
 }
 
-// 카테고리 이름 변환 함수
 function getCategoryName(category) {
-    const categories = {
+    return {
         'digital': '디지털/가전',
         'health': '건강/운동',
         'pet': '반려동물',
         'fashion': '패션/잡화'
-    };
-    return categories[category] || category;
+    }[category] || category;
 }
