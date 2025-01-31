@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>선물 추천 결과 | Gift Finder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF69B4',
+                        secondary: '#9F7AEA'
+                    },
+                    animation: {
+                        'bounce-in': 'bounceIn 1s ease-out'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-pink-50 to-purple-50 min-h-screen">
+    <!-- 결과 헤더 -->
+    <header class="text-center py-8 px-4">
+        <h1 class="text-4xl font-bold text-primary mb-2">🎉 추천 선물</h1>
+        <p class="text-gray-600">당신을 위해 엄선된 선물들이에요!</p>
+    </header>
+
+    <!-- 결과 그리드 -->
+    <main class="container mx-auto px-4 max-w-6xl">
+        <div id="results-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- 결과 카드들이 여기에 동적으로 추가됨 -->
+        </div>
+    </main>
+
+    <!-- 다시 검색하기 버튼 -->
+    <div class="text-center py-8">
+        <button onclick="window.location.href='index.html'" 
+                class="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-6 rounded-lg transform transition hover:scale-105">
+            🔍 다시 검색하기
+        </button>
+    </div>
+
+    <script src="js/results.js"></script>
+</body>
+</html>
