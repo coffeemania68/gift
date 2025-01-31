@@ -21,182 +21,121 @@
 </head>
 <body class="bg-gradient-to-br from-pink-50 to-purple-50 min-h-screen">
     <!-- 헤더 섹션 -->
-    <header class="text-center py-8 px-4">
-        <h1 class="text-4xl font-bold text-primary mb-2">🎁 선물 추천</h1>
-        <p class="text-gray-600">특별한 선물을 찾아보세요</p>
+    <header class="text-center py-12 px-4">
+        <!-- 썸네일 이미지 박스 -->
+        <div class="relative w-32 h-32 mx-auto mb-6">
+            <div class="absolute inset-0 bg-primary/10 rounded-full animate-pulse"></div>
+            <img src="./images/gift-thumb.png" alt="선물 추천" class="w-full h-full object-cover rounded-full shadow-lg border-4 border-white">
+        </div>
+        <h1 class="text-4xl font-bold text-gray-800 mb-3">선물 추천</h1>
+        <p class="text-gray-600 text-lg">특별한 선물을 찾아보세요</p>
     </header>
 
     <!-- 필터 섹션 -->
-    <main class="container mx-auto px-4 max-w-2xl">
-        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
-            <form id="giftFilter" class="space-y-8">
-                <!-- 예산 선택 섹션 -->
-                <section class="bg-white rounded-2xl p-6 shadow-sm">
-                    <h2 class="text-lg font-medium text-gray-800 mb-4">예산을 선택하세요</h2>
-                    <div class="grid grid-cols-3 gap-3">
-                        <button type="button" class="category-btn" data-value="1m">
-                            <div class="icon-circle">💰</div>
-                            <span class="text-sm">1만원대</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="3m">
-                            <div class="icon-circle">💰</div>
-                            <span class="text-sm">3만원대</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="5m">
-                            <div class="icon-circle">💰</div>
-                            <span class="text-sm">5만원대</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="10m">
-                            <div class="icon-circle">💎</div>
-                            <span class="text-sm">10만원대</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="20m">
-                            <div class="icon-circle">💎</div>
-                            <span class="text-sm">20만원대</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="under50">
-                            <div class="icon-circle">💎</div>
-                            <span class="text-sm">50만원 미만</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="over50">
-                            <div class="icon-circle">👑</div>
-                            <span class="text-sm">50만원 이상</span>
-                        </button>
+    <main class="container mx-auto px-4 pb-12 max-w-2xl">
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <!-- 상단 장식 -->
+            <div class="h-2 bg-gradient-to-r from-primary to-blue-500"></div>
+            
+            <!-- 필터 컨텐츠 -->
+            <div class="p-8">
+                <form id="giftFilter" class="space-y-8">
+                    <!-- 예산 선택 -->
+                    <div class="filter-group" data-type="price">
+                        <label class="block text-lg font-medium text-gray-800 mb-3">
+                            예산을 선택하세요
+                        </label>
+                        <select class="w-full p-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-700 focus:border-primary focus:ring-2 focus:ring-primary/20">
+                            <option value="">선택해주세요</option>
+                            <option value="1m">1만원대</option>
+                            <option value="3m">3만원대</option>
+                            <option value="5m">5만원대</option>
+                            <option value="10m">10만원대</option>
+                            <option value="20m">20만원대</option>
+                            <option value="under50">50만원 미만</option>
+                            <option value="over50">50만원 이상</option>
+                        </select>
                     </div>
-                </section>
 
-                <!-- 카테고리 선택 섹션 -->
-                <section class="bg-white rounded-2xl p-6 shadow-sm">
-                    <h2 class="text-lg font-medium text-gray-800 mb-4">어떤 종류의 선물을 찾으시나요?</h2>
-                    <div class="grid grid-cols-2 gap-3">
-                        <button type="button" class="category-btn" data-value="digital">
-                            <div class="icon-circle">💻</div>
-                            <span class="text-sm">디지털/가전</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="health">
-                            <div class="icon-circle">💪</div>
-                            <span class="text-sm">건강/운동</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="pet">
-                            <div class="icon-circle">🐾</div>
-                            <span class="text-sm">반려동물</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="fashion">
-                            <div class="icon-circle">👔</div>
-                            <span class="text-sm">패션/잡화</span>
-                        </button>
+                    <!-- 카테고리 선택 -->
+                    <div class="filter-group" data-type="category">
+                        <label class="block text-lg font-medium text-gray-800 mb-3">
+                            어떤 종류의 선물을 찾으시나요?
+                        </label>
+                        <select class="w-full p-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-700 focus:border-primary focus:ring-2 focus:ring-primary/20">
+                            <option value="">선택해주세요</option>
+                            <option value="digital">디지털/가전</option>
+                            <option value="health">건강/운동</option>
+                            <option value="pet">반려동물</option>
+                            <option value="fashion">패션/잡화</option>
+                        </select>
                     </div>
-                </section>
 
-                <!-- 성별 선택 섹션 -->
-                <section class="bg-white rounded-2xl p-6 shadow-sm">
-                    <h2 class="text-lg font-medium text-gray-800 mb-4">성별을 선택하세요</h2>
-                    <div class="grid grid-cols-3 gap-3">
-                        <button type="button" class="category-btn" data-value="m">
-                            <div class="icon-circle">👨</div>
-                            <span class="text-sm">남성</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="f">
-                            <div class="icon-circle">👩</div>
-                            <span class="text-sm">여성</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="a">
-                            <div class="icon-circle">🤝</div>
-                            <span class="text-sm">모두</span>
-                        </button>
+                    <!-- 성별 선택 -->
+                    <div class="filter-group" data-type="gender">
+                        <label class="block text-lg font-medium text-gray-800 mb-3">
+                            성별을 선택하세요
+                        </label>
+                        <select class="w-full p-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-700 focus:border-primary focus:ring-2 focus:ring-primary/20">
+                            <option value="">선택해주세요</option>
+                            <option value="m">남성</option>
+                            <option value="f">여성</option>
+                            <option value="a">모두</option>
+                        </select>
                     </div>
-                </section>
 
-                <!-- 연령대 선택 섹션 -->
-                <section class="bg-white rounded-2xl p-6 shadow-sm">
-                    <h2 class="text-lg font-medium text-gray-800 mb-4">연령대를 선택하세요</h2>
-                    <div class="grid grid-cols-2 gap-3">
-                        <button type="button" class="category-btn" data-value="b">
-                            <div class="icon-circle">👶</div>
-                            <span class="text-sm">영아 (0-3세)</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="k">
-                            <div class="icon-circle">🧒</div>
-                            <span class="text-sm">아동 (4-13세)</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="t">
-                            <div class="icon-circle">👦</div>
-                            <span class="text-sm">청소년 (14-19세)</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="y">
-                            <div class="icon-circle">👱</div>
-                            <span class="text-sm">청년 (20-29세)</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="d">
-                            <div class="icon-circle">🧑</div>
-                            <span class="text-sm">성인 (30-49세)</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="s">
-                            <div class="icon-circle">🧓</div>
-                            <span class="text-sm">장년 (50세+)</span>
-                        </button>
+                    <!-- 연령대 선택 -->
+                    <div class="filter-group" data-type="age">
+                        <label class="block text-lg font-medium text-gray-800 mb-3">
+                            연령대를 선택하세요
+                        </label>
+                        <select class="w-full p-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-700 focus:border-primary focus:ring-2 focus:ring-primary/20">
+                            <option value="">선택해주세요</option>
+                            <option value="b">영아 (0-3세)</option>
+                            <option value="k">아동 (4-13세)</option>
+                            <option value="t">청소년 (14-19세)</option>
+                            <option value="y">청년 (20-29세)</option>
+                            <option value="d">성인 (30-49세)</option>
+                            <option value="s">장년 (50세+)</option>
+                        </select>
                     </div>
-                </section>
 
-                <!-- 관계 선택 섹션 -->
-                <section class="bg-white rounded-2xl p-6 shadow-sm">
-                    <h2 class="text-lg font-medium text-gray-800 mb-4">어떤 관계인가요?</h2>
-                    <div class="grid grid-cols-2 gap-3">
-                        <button type="button" class="category-btn" data-value="f">
-                            <div class="icon-circle">👨‍👩‍👧‍👦</div>
-                            <span class="text-sm">가족</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="s">
-                            <div class="icon-circle">💑</div>
-                            <span class="text-sm">연인</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="r">
-                            <div class="icon-circle">🤝</div>
-                            <span class="text-sm">친구</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="w">
-                            <div class="icon-circle">💼</div>
-                            <span class="text-sm">직장동료</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="t">
-                            <div class="icon-circle">📚</div>
-                            <span class="text-sm">선생님</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="c">
-                            <div class="icon-circle">🤵</div>
-                            <span class="text-sm">고객/거래처</span>
-                        </button>
+                    <!-- 관계 선택 -->
+                    <div class="filter-group" data-type="relation">
+                        <label class="block text-lg font-medium text-gray-800 mb-3">
+                            어떤 관계인가요?
+                        </label>
+                        <select class="w-full p-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-700 focus:border-primary focus:ring-2 focus:ring-primary/20">
+                            <option value="">선택해주세요</option>
+                            <option value="f">가족</option>
+                            <option value="s">연인</option>
+                            <option value="r">친구</option>
+                            <option value="w">직장동료</option>
+                            <option value="t">선생님</option>
+                            <option value="c">고객/거래처</option>
+                        </select>
                     </div>
-                </section>
 
-                <!-- 계절 선택 섹션 -->
-                <section class="bg-white rounded-2xl p-6 shadow-sm">
-                    <h2 class="text-lg font-medium text-gray-800 mb-4">어느 계절에 선물하나요?</h2>
-                    <div class="grid grid-cols-2 gap-3">
-                        <button type="button" class="category-btn" data-value="p">
-                            <div class="icon-circle">🌸</div>
-                            <span class="text-sm">봄</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="u">
-                            <div class="icon-circle">☀️</div>
-                            <span class="text-sm">여름</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="f">
-                            <div class="icon-circle">🍁</div>
-                            <span class="text-sm">가을</span>
-                        </button>
-                        <button type="button" class="category-btn" data-value="w">
-                            <div class="icon-circle">❄️</div>
-                            <span class="text-sm">겨울</span>
-                        </button>
+                    <!-- 계절 선택 -->
+                    <div class="filter-group" data-type="season">
+                        <label class="block text-lg font-medium text-gray-800 mb-3">
+                            어느 계절에 선물하나요?
+                        </label>
+                        <select class="w-full p-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-700 focus:border-primary focus:ring-2 focus:ring-primary/20">
+                            <option value="">선택해주세요</option>
+                            <option value="p">봄</option>
+                            <option value="u">여름</option>
+                            <option value="f">가을</option>
+                            <option value="w">겨울</option>
+                        </select>
                     </div>
-                </section>
 
-                <!-- 검색 버튼 -->
-                <button type="submit" class="w-full bg-primary text-white font-medium py-4 rounded-xl shadow-md">
-                    나에게 딱 맞는 선물 찾기
-                </button>
-            </form>
+                    <!-- 검색 버튼 -->
+                    <button type="submit" class="w-full bg-gradient-to-r from-primary to-blue-500 text-white font-medium py-4 rounded-xl shadow-md hover:shadow-lg transform transition hover:-translate-y-0.5">
+                        나에게 딱 맞는 선물 찾기
+                    </button>
+                </form>
+            </div>
         </div>
     </main>
 
