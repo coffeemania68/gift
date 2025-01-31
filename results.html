@@ -19,6 +19,30 @@
     </script>
 </head>
 <body class="bg-gradient-to-br from-pink-50 to-purple-50 min-h-screen">
+    <!-- 제휴 문구 -->
+    <div class="mt-16" style="
+        background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(240,240,255,0.7));
+        border: 1px solid rgba(0,0,0,0.05);
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    ">
+        <p style="
+            color: #4a4a4a;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+        ">
+            🤝 이 포스팅은 <span style="color: #1e88e5; font-weight: bold;">쿠팡 파트너스 활동</span>의 일환으로, 
+            이에 따른 일정액의 <span style="color: #4caf50; font-weight: bold;">수수료를 제공받습니다</span>.
+        </p>
+    </div>
+
     <!-- 결과 헤더 -->
     <header class="text-center py-8 px-4">
         <h1 class="text-4xl font-bold text-primary mb-2">🎉 추천 선물</h1>
@@ -32,14 +56,13 @@
         </div>
     </main>
 
-    <!-- 다시 검색하기 버튼 -->
-    <div class="text-center py-8">
-        <button onclick="window.location.href='index.html'" 
-                class="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-6 rounded-lg transform transition hover:scale-105">
-            🔍 다시 검색하기
-        </button>
-    </div>
-    <script src="./data/products.js"></script>   <!-- 먼저 로드 -->
-    <script src="./js/results.js"></script>      <!-- 그 다음 로드 -->
+    <!-- 푸터 -->
+    <footer class="text-center py-8 mt-12 text-gray-600">
+        <p>문의: <a href="mailto:yourmoments@gmail.com" class="text-primary hover:underline">yourmoments@gmail.com</a></p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="./data/products.js"></script>
+    <script src="./js/results.js"></script>
 </body>
 </html>
